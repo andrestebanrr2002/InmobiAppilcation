@@ -1,0 +1,90 @@
+<div class="row">
+    <div class="col-md-3 col-lg-3"></div>
+    <div class="col-md-6 col-lg-6">
+    <img ng-src="../../Files/images/Persona/user_icon.png" width="80%" height="80%" class="img-responsive center"
+							alt="properties" />
+    </div>
+    <div class="col-md-3 col-lg-3"></div>
+</div>
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div cllass>
+            <form class="was-validated" ng-submit="ActualizarDatos()">
+                <hr>
+                <h2><b>Datos Personales</b></h2>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">						
+                        <label><h4>Nombres</h4></label>				
+                        <div class="input-group">							
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Ingrese sus Nombres" ng-model="Registro.nombres" required>						    
+                        </div>					
+                        <div ng-show="!Registro.nombres" class="text-danger"><span>*Obligatorio</span></div>			
+                    </div>                    
+                    <div class="col-md-12 col-lg-12 col-sm-12">						
+                        <label><h4>Apellidos</h4></label>				
+                        <div class="input-group">							
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Ingrese sus Apellidos" ng-model="Registro.apellidos" required>								    					    
+                        </div>
+                        <div ng-show="!Registro.apellidos" class="text-danger"><span>*Obligatorio</span></div>	
+                    </div>  
+                                  
+                    <div class="col-md-12 col-lg-12 col-sm-12">	
+                        					
+                        <label><h4>Fecha de Nacimiento</h4></label>				
+                        <div class="input-group">							
+                            <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                            <input type="date" class="form-control" placeholder="Ingrese su fecha de nacimiento" ng-model="Registro.fecha_nacimiento.value" required ng-change="Registro.fecha_nacimiento.id = Obtener_Fecha(Registro.fecha_nacimiento.value)">								    						    
+                        </div>
+                        <div ng-show="!Registro.fecha_nacimiento.id" class="text-danger"><span>*Obligatorio</span></div>
+                    </div>
+                    <div class="col-md-12 col-lg-12 col-sm-12">						
+                        <label><h4>Correo Electrónico</h4></label>				
+                        <div class="input-group">							
+                            <span class="input-group-addon"><i class="fas fa-envelope-open"></i></span>
+                            <input type="text" class="form-control" placeholder="Ingrese su correo" ng-model="Registro.email" required ng-blur="ValidarCorreo($event.target)">
+                        </div>
+                        <div ng-show="!Registro.email" class="text-danger"><span>*Obligatorio</span></div>		
+                        <div ng-show="msg_correo!=''" class="text-danger"><span ng-bind-html="msg_correo"></span></div>
+                        <br>
+                        <br>
+                        <a style="font-size:18px;" ng-click="formclave!='true'?formclave='true':formclave='false'">Cambiar Contraseña</a>
+                    </div>
+                    
+                    <div ng-if="formclave=='true'">
+                        <div class="col-md-12 col-lg-12 col-sm-12">	
+                            <br>   					
+                            <label><h4>Contraseña Actual:</h4></label>	
+                            <div class="input-group">							
+                                <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                <input type="password" class="form-control" placeholder="Ingrese su contraseña" ng-model="Registro.clave_act" required>						    
+                            </div>
+                            <div ng-show="!Registro.clave_act" class="text-danger"><span>*Obligatorio</span></div>		
+                        </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12">						
+                            <label><h4>Nueva Contraseña:</h4></label>	
+                            <div class="input-group">							
+                                <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                <input type="password" class="form-control" placeholder="Ingrese su contraseña" ng-model="Registro.nue_clave" required>						    
+                            </div>
+                            <div ng-show="!Registro.nue_clave" class="text-danger"><span>*Obligatorio</span></div>		
+                        </div>
+                        <div class="col-md-12 col-lg-12 col-sm-12">						
+                            <label><h4>Confirmar Contraseña:</h4></label>	
+                            <div class="input-group">							
+                                <span class="input-group-addon"><i class="fas fa-key"></i></span>
+                                <input type="password" class="form-control" placeholder="Confirme su contraseña" ng-model="Registro.conf_clave" required>						    
+                            </div>
+                            <div ng-show="!Registro.conf_clave" class="text-danger"><span>*Obligatorio</span></div>		
+                            <div ng-show="Registro.conf_clave != Registro.nue_clave" class="text-danger"><span>Las contraseñas no coinciden</span></div>
+                        </div>                    
+                    </div>
+                </div>	
+                <hr>															
+                <button class="btn btn-success">Actualizar</button>
+            </form>
+        </div>
+    </div>
+</div>

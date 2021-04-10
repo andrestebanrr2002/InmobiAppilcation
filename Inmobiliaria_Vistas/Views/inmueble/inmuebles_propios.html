@@ -1,0 +1,284 @@
+<div class="row">
+    <div class="col-md-12 col-lg-12 col-sm-12">
+        <div cllass>
+            <form class="was-validated" ng-submit="Registrar()">
+                <hr>
+                <h2><b>Mis Inmuebles</b></h2>
+                <hr>
+                <div class="row">
+                    <div class="col-md-12 col-lg-12 col-sm-12">						
+                       	
+                    </div>                                                                            
+                </div>	
+                <hr>	
+                <div class="table-responsive">													
+                    <table class="table display  table-bordered hover datatable" width="50%">
+                        <thead>
+                            <tr>
+                                <th width="3%">#</th>
+                                <th width="10%">Titulo</th>
+                                <th width="10%">Descripción</th>
+                                <th width="20%">Propiedades</th>
+                                <th width="10%">Ubicacion</th>
+                                <th width="10%">Servicio</th>
+                                <th width="10%">Precio</th>
+                                <th width="10%">Estado</th>
+                                <th width="10%">Fecha Creación</th>
+                                <th width="7%" class="text-center"><i class="glyphicon glyphicon-cog"></i></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="x in InmueblesPropios">
+                                <td class="text-XX18 text-bold">{{$index+1}}</td>
+                                <td class="text-XX18">{{x.titulo}}</td>
+                                <td class="text-left">{{x.descripcion}}</td>
+                                <td class="text-left text-XX14">
+                                    <b>Tipo: </b>{{x.tipo}}<br>
+                                    <b>Metros Cuadrados: </b>{{x.metrosCuadrados}} m<sup>2</sup><br>
+                                    <b>Pisos: </b>{{x.pisos}}<br>
+                                    <b>N° Habitaciones: </b>{{x.habitaciones}}<br>
+                                    <b>N° Baños: </b>{{x.sanitarios}}<br>
+                                    <b>Sala: </b>{{x.sala}}.
+                                    <b> Cocina: </b>{{x.cocina}}<br>
+                                </td>
+                                <td class="text-left text-XX14">
+                                    <b>Pais: </b>{{x.pais}}<br>
+                                    <b>Departamento: </b>{{x.departamento}}<br>
+                                    <b>Ciudad: </b>{{x.ciudad}}<br>
+                                    <b>Zona / Barrio: </b>{{x.zona}}                                   
+                                </td>
+                                <td class="text-left text-XX14">{{x.servicio}}<br></td>
+                                <td class="text-center text-XX">{{Formato_Dinero(x.precio)}}<br></td>
+                                <td class="text-center text-XX" ng-class="x.estado=='ACTIVO'?'text-success':'text-danger'">{{x.estado}}<br></td>
+                                <td class="text-left text-XX14">{{Obtener_Fecha(x.fechaCreacion)}}<br></td>
+                                <td class="">
+                                    <br>
+                                    <button type = 'button' ng-click="ObtenerInmueble(x.id)" data-toggle="modal" data-target=".bd-example-modal-lg" class='btn btn-info center' style="width: 60px; height: 30px;" title = 'Actualizar' ng-click="ModalAcutalizar(x.id)"><i class="glyphicon glyphicon-pencil" width="200%" height="200%"></i></button>                                    
+                                    <br>                                    
+                                    <button type = 'button' ng-click="EliminarInmueble(x.id)" class='btn btn-danger center' style="width: 60px; height: 30px;" title = 'Eliminar' ng-click="ModalAcutalizar(x.id)"><i class="glyphicon glyphicon-trash" width="200%" height="200%"></i></button>
+                                </td>
+                            </tr>                            
+                        </tbody>
+                    </table>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="ActModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" style="width: 900px; height: 400px;">
+        <div class="modal-content">
+            
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Actualizar Inmueble</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <form ng-submit="ActualizarInmueble()">
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12 col-sm-12">						
+                                <label><h4>Titulo</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="fas fa-home"></i></span>
+                                    <input type="text" class="form-control" placeholder="Ingrese el titulo" ng-model="Registro.titulo" required>						    
+                                </div>					
+                                <div ng-show="!Registro.titulo" class="text-danger"><span>*Obligatorio</span></div>			
+                            </div>                    
+                            <div class="col-md-12 col-lg-12 col-sm-12">						
+                                <label><h4>Descripcion</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="fas fa-clipboard-list"></i></span>
+                                    <textarea class="form-control" placeholder="Ingrese la descripción" ng-model="Registro.descripcion" required></textarea>								    					    
+                                </div>
+                                <div ng-show="!Registro.descripcion" class="text-danger"><span>*Obligatorio</span></div>
+                                <br>	
+                            </div>
+                            <br>
+                            <br>
+                            <h3><b>Propiedades</b></h2>    
+                            <div class="col-md-6 col-lg-6 col-sm-12">	
+                                                                           
+                                <label><h4>Tipo</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.tipo" required style="width:100%">
+                                        <option value="">Seleccione el tipo</option>
+                                        <option value="Casa">Casa</option>
+                                        <option value="Apartamento">Apartamento</option>
+                                        <option value="Bodega">Bodega</option>
+                                        <option value="Garaje">Garaje</option>
+                                    </select>                            
+                                </div>
+                                <div ng-show="!Registro.tipo" class="text-danger"><span>*Obligatorio</span></div>
+                                
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">	                        					
+                                <label><h4>Servicio</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.servicio" required style="width:100%">
+                                        <option value="">Seleccione el servicio</option>
+                                        <option value="Venta">Venta</option>
+                                        <option value="Arriendo">Arriendo</option>
+                                    </select>         
+                                    
+                                </div>                                                
+                                <div ng-show="!Registro.servicio" class="text-danger"><span>*Obligatorio</span></div>                   
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">	                        					
+                                <label><h4>Número de Baños</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.sanitarios" required style="width:100%">
+                                        <option value="">Seleccione el Numero</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>                            
+                                </div>
+                                <div ng-show="!Registro.sanitarios" class="text-danger"><span>*Obligatorio</span></div>
+                                
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">	                        					
+                                <label><h4>Número de Habitaciones</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.habitaciones" required style="width:100%">
+                                        <option value="">Seleccione el Numero</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>                            
+                                </div>
+                                <div ng-show="!Registro.habitaciones" class="text-danger"><span>*Obligatorio</span></div>
+                                
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">	                        					
+                                <label><h4>Sala</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.sala" required style="width:100%">
+                                        <option value="SI">Si</option>
+                                        <option value="NO">No</option>
+                                    </select>                            
+                                </div>                                                
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-6 col-sm-12">	                        					
+                                <label><h4>Cocina</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.cocina" required style="width:100%">
+                                        <option value="SI">Si</option>
+                                        <option value="NO">No</option>
+                                    </select>                            
+                                </div>                                                
+                            </div>
+                             
+                            <div class="col-md-6 col-lg-6 col-sm-12">	                        					
+                                <label><h4>Pisos</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.pisos" required style="width:100%">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>                            
+                                </div>                                                
+                            </div>
+                            
+                            <div class="col-md-6 col-lg-6 col-sm-12">	                        					
+                                <label><h4>Metros Cuadrados</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <input type="number" class="form-control" placeholder="Ingrese los metros cuadrados" ng-model="Registro.metroscuadrados" required>						                        
+                                </div>                                                
+                                <div ng-show="!Registro.metroscuadrados" class="text-danger"><span>*Obligatorio</span></div>
+                                <br>	
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">	                        					
+                                <label><h4>Garaje</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.garaje" required style="width:100%">
+                                        <option value="SI">Si</option>
+                                        <option value="NO">No</option>
+                                    </select>                            
+                                </div>                                                
+                            </div>
+                            <div class="col-md-6 col-lg-6 col-sm-12">	                        					
+                                <label><h4>{{Registro.servicio=='Venta'||Registro.servicio==''?'Precio':'Mensualidad'}}</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <input type="number" class="form-control" placeholder="Ingrese el precio" ng-model="Registro.precio" required>						                        
+                                </div>                                                
+                                <div ng-show="!Registro.precio" class="text-danger"><span>*Obligatorio</span></div>
+                                <br>	
+                            </div>
+                            <br>
+                            <br>
+                            <h3><b>Ubicación</b></h2> 
+                                
+                            <div class="col-md-3 col-lg-3 col-sm-12">	                        					
+                                <label><h4>Pais</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.pais" required style="width:100%">
+                                        <option value="">Seleccione el Pais</option>
+                                        <option value="COLOMBIA">COLOMBIA</option>
+                                    </select>  
+                                </div>                                                
+                                <div ng-show="!Registro.pais" class="text-danger"><span>*Obligatorio</span></div>
+                                <br>	
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-12">	                        					
+                                <label><h4>Departamento</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.departamento" required style="width:100%">
+                                        <option value="">Seleccione el departamento</option>
+                                        <option value="CUNDINAMARCA">CUNDINAMARCA</option>
+                                    </select>  
+                                </div>                                                
+                                <div ng-show="!Registro.departamento" class="text-danger"><span>*Obligatorio</span></div>
+                                <br>	
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-12">	                        					
+                                <label><h4>Ciudad</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+                                    <select class="form-control" ng-model="Registro.ciudad" required style="width:100%">
+                                        <option value="">Seleccione el departamento</option>
+                                        <option value="BOGOTÁ">BOGOTÁ</option>
+                                    </select>  
+                                </div>                                                
+                                <div ng-show="!Registro.ciudad" class="text-danger"><span>*Obligatorio</span></div>
+                                <br>	
+                            </div>
+                            <div class="col-md-3 col-lg-3 col-sm-12">						
+                                <label><h4>Zona/Barrio/Otros</h4></label>				
+                                <div class="input-group">							
+                                    <span class="input-group-addon"><i class="fas fa-home"></i></span>
+                                    <input type="text" class="form-control" placeholder="Ingrese la zona" ng-model="Registro.zona" required>						    
+                                </div>					
+                                <div ng-show="!Registro.zona" class="text-danger"><span>*Obligatorio</span></div>			
+                            </div>   
+                                                                                  
+                        </div>	
+                        <hr>															
+                        <input type="submit" class="btn btn-success" value="Actualizar">
+                    </form>
+                  </div>               
+        </div>
+    </div>
+</div>
+  

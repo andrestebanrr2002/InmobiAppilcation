@@ -1,0 +1,55 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="../../Assets/style.css"/>
+
+<!-- banner -->
+<div class="inside-banner">
+  	<div class="container"> 
+	    <span class="pull-right"><a href="#">Inicio</a> / Iniciar Sesión</span>
+	  
+	</div>
+</div>
+<!-- banner -->
+
+
+
+<div class="row"> 
+	<div class="col-md-6 col-lg-6 col-sm-12 nopadding">
+		<img ng-src="../../Files/images/Login/login_img.jpg" width="150%" height="150%" class="img-responsive"
+							alt="properties" />
+	</div>
+	<div class="col-md-6 col-lg-6 col-sm-12">
+		<div class="row">
+			<div class="col-md-1 col-lg-1 col-sm-0">
+
+			</div>
+			<div class="col-md-10 col-lg-10 col-sm-12">
+				<div cllass>
+					<form class="was-validated" ng-submit="IniciarSesion()">
+						<hr>
+						<h2><b>Iniciar Sesión</b></h2>
+						<nr>
+						<nr>
+						<label><h4>Correo Electrónico:</h4></label>				
+						<div class="input-group">							
+						    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+						    <input type="text" id="email" class="form-control" placeholder="Ingrese su correo" ng-model="Registro.email" ng-blur="ValidarCorreo($event.target)">						    
+						</div>
+						<div ng-show="Registro.msg_error_correo!=''" class="text-danger">{{Registro.msg_error_correo}}</div>
+						<div ng-show="msg_correo!=''" class="text-danger"><span ng-bind-html="msg_correo"></span></div>
+						
+						<label><h4>Contraseña:</h4></label>	
+						<div class="input-group">							
+						    <span class="input-group-addon"><i class="fas fa-key"></i></span>
+						    <input type="password" class="form-control" placeholder="Ingrese su contraseña" ng-model="Registro.clave">						    
+						</div>
+						<div ng-show="Registro.msg_error_clave!=''" class="text-danger">{{Registro.msg_error_clave}}</div>		
+						<hr>
+						<hr>		
+						<input type="submit" class="btn btn-success" value="Ingresar">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+

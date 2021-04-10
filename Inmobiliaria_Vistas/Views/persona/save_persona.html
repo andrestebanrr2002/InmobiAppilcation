@@ -1,0 +1,109 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<link rel="stylesheet" href="../../Assets/style.css"/>
+
+<!-- banner -->
+<div class="inside-banner">
+  	<div class="container"> 
+	    <span class="pull-right"><a href="#">Inicio</a> / Registrarse</span>
+	  
+	</div>
+</div>
+<!-- banner -->
+
+
+
+<div class="row">
+	<div class="col-md-6 col-lg-6 col-sm-12">
+		<div class="row">
+			<div class="col-md-1 col-lg-1 col-sm-0">
+
+			</div>
+			<div class="col-md-10 col-lg-10 col-sm-12">
+				<div cllass>
+					<form class="was-validated" ng-submit="Registrar()">
+						<hr>
+						<h2><b>Registrarse</b></h2>
+						<hr>
+						<hr>
+						<div class="row">
+							<div class="col-md-6 col-lg-6 col-sm-12">						
+								<label><h4>Primer Nombre</h4></label>				
+								<div class="input-group">							
+								    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								    <input type="text" class="form-control" placeholder="Ingrese su primer nombre" ng-model="Registro.p_nombre" required>						    
+								</div>					
+								<div ng-show="!Registro.p_nombre" class="text-danger"><span>*Obligatorio</span></div>			
+							</div>
+							<div class="col-md-6 col-lg-6 col-sm-12">						
+								<label><h4>Segundo Nombre</h4></label>				
+								<div class="input-group">							
+								    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								    <input type="text" class="form-control" placeholder="Ingrese su segundo nombre" ng-model="Registro.s_nombre">						    
+								</div>
+								<div class="text-default"><span>*Opcional</span></div>	
+							</div>
+							<div class="col-md-6 col-lg-6 col-sm-12">						
+								<label><h4>Primer Apellido</h4></label>				
+								<div class="input-group">							
+								    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								    <input type="text" class="form-control" placeholder="Ingrese su primer apellido" ng-model="Registro.p_apellido" required>								    					    
+								</div>
+								<div ng-show="!Registro.p_apellido" class="text-danger"><span>*Obligatorio</span></div>	
+							</div>
+							<div class="col-md-6 col-lg-6 col-sm-12">						
+								<label><h4>Segundo Apellido</h4></label>				
+								<div class="input-group">							
+								    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+								    <input type="text" class="form-control" placeholder="Ingrese su segundo apellido" ng-model="Registro.s_apellido" required>								    						    
+								</div>
+								<div ng-show="!Registro.s_apellido" class="text-danger"><span>*Obligatorio</span></div>			
+							</div>
+							<div class="col-md-12 col-lg-12 col-sm-12">						
+								<label><h4>Fecha de Nacimiento</h4></label>				
+								<div class="input-group">							
+								    <span class="input-group-addon"><i class="far fa-calendar-alt"></i></span>
+								    <input type="date" class="form-control" placeholder="Ingrese su fecha de nacimiento" ng-model="Registro.fecha_nacimiento.value" required ng-change="Registro.fecha_nacimiento.id = Obtener_Fecha(Registro.fecha_nacimiento.value)">								    						    
+								</div>
+								<div ng-show="!Registro.fecha_nacimiento.id" class="text-danger"><span>*Obligatorio</span></div>
+							</div>
+							<div class="col-md-12 col-lg-12 col-sm-12">						
+								<label><h4>Correo Electrónico</h4></label>				
+								<div class="input-group">							
+								    <span class="input-group-addon"><i class="fas fa-envelope-open"></i></span>
+								    <input type="text" class="form-control" placeholder="Ingrese su correo" ng-model="Registro.email" required ng-blur="ValidarCorreo($event.target)">
+								</div>
+								<div ng-show="!Registro.email" class="text-danger"><span>*Obligatorio</span></div>		
+								<div ng-show="msg_correo!=''" class="text-danger"><span ng-bind-html="msg_correo"></span></div>
+							</div>
+							<div class="col-md-12 col-lg-12 col-sm-12">						
+								<label><h4>Contraseña:</h4></label>	
+								<div class="input-group">							
+								    <span class="input-group-addon"><i class="fas fa-key"></i></span>
+								    <input type="password" class="form-control" placeholder="Ingrese su contraseña" ng-model="Registro.clave" required>						    
+								</div>
+								<div ng-show="!Registro.clave" class="text-danger"><span>*Obligatorio</span></div>		
+							</div>
+							<div class="col-md-12 col-lg-12 col-sm-12">						
+								<label><h4>Confirmar Contraseña:</h4></label>	
+								<div class="input-group">							
+								    <span class="input-group-addon"><i class="fas fa-key"></i></span>
+								    <input type="password" class="form-control" placeholder="Confirme su contraseña" ng-model="Registro.conf_clave" required>						    
+								</div>
+								<div ng-show="!Registro.conf_clave" class="text-danger"><span>*Obligatorio</span></div>		
+								<div ng-show="Registro.conf_clave != Registro.clave" class="text-danger"><span>Las contraseñas no coinciden</span></div>
+							</div>
+						</div>		
+						<hr>															
+						<input type="submit" class="btn btn-success" value="Registrar">
+					</form>
+				</div>
+			</div>
+		</div>
+	</div> 
+	<div class="col-md-6 col-lg-6 col-sm-12 nopadding">
+		<img ng-src="../../Files/images/Persona/register.jpg" width="150%" height="150%" class="img-responsive"
+							alt="properties" />
+	</div>
+	
+</div>
+
